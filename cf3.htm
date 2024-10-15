@@ -17,12 +17,16 @@
     <div id="cf-error-details" class="cf-error-details-wrapper">
       <div class="cf-wrapper cf-header cf-error-overview">
         <h1 data-translate="block_headline">Sorry, you have been blocked</h1>
-        <h2 class="cf-subheadline"><span data-translate="unable_to_access">You are unable to access</span> gygtest.net now</h2>
+        <h2 class="cf-subheadline"><span data-translate="unable_to_access">If you are working remotely, follow this <a href="https://stack.gygservice.com/docs/default/component/security-docs/runbooks/wfh">link</a>.</span></h2>
         <br />
         <h4 class="cf-subheadline">
           <span id="cf-footer-item-ip" class="cf-footer-item sm:block sm:mb-1">
             Your IP:
             <span id="cf-footer-ip"><strong class="font-semibold">::CLIENT_IP::</strong></span>
+            <strong class="font-semibold">
+              <button href="#" id="get-ip" onclick="copyContent()" style="font-weight: 800; margin-left: 10px; font-size: 15px;">Copy</button>
+              <p href="#" id="got-ip" style="font-weight: 800; margin-left: 10px; font-size: 15px; display: none; color: #595959;">Copied!</p>
+            </strong>
           </span>
           <br />
           <span class="cf-footer-item sm:block sm:mb-1">Cloudflare Ray ID: <strong class="font-semibold">::RAY_ID::</strong></span>
@@ -67,6 +71,19 @@
   window._cf_translation = {};
   
   
+</script>
+<script>
+  let text = document.getElementById('cf-footer-ip').innerText;
+  const copyContent = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      document.getElementById('get-ip').hidden = true;
+      document.getElementById('got-ip').style.display = 'inline';
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
 </script>
 
 
